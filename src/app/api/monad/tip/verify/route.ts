@@ -50,11 +50,10 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({
+    ...result,
     unlocked: true,
     tipAmount: MONAD_TIP_AMOUNT,
     tipRecipient: MONAD_TIP_RECIPIENT,
-    contract: MONAD_REVEAL_PASS,
-    ...result,
   });
 }
 

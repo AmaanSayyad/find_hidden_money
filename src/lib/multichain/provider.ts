@@ -31,13 +31,14 @@ type EIP6963ProviderDetail = {
 };
 
 declare global {
-  interface Window {
-    ethereum?: EthereumProvider;
-  }
-
   interface WindowEventMap {
     "eip6963:announceProvider": CustomEvent<EIP6963ProviderDetail>;
   }
+}
+
+function windowEthereum(): EthereumProvider | undefined {
+  if (typeof window === "undefined") return undefined;
+  return (window as unknown as { ethereum?: EthereumProvider }).ethereum;
 }
 
 const METAMASK_RDNS = new Set([
@@ -61,7 +62,7 @@ function isLikelyMetaMask(provider: EthereumProvider): boolean {
 
 function collectInjectedProviders(): EthereumProvider[] {
   if (typeof window === "undefined") return [];
-  const eth = window.ethereum;
+  const eth = windowEthereum();
   if (!eth) return [];
 
   const list: EthereumProvider[] = [];
