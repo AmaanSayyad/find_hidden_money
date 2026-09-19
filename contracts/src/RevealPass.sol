@@ -2,8 +2,8 @@
 pragma solidity ^0.8.24;
 
 /// @title RevealPass
-/// @notice Find Hidden Money unlock on Monad. Pay the native MON tip once;
-///         the contract records the reveal and forwards proceeds to treasury.
+/// @notice Find Hidden Money unlock on Monad Mainnet. Pay 1 native MON once;
+///         the contract records the reveal and keeps the tip here.
 contract RevealPass {
     address public immutable treasury;
     uint256 public immutable tipAmount;
@@ -14,13 +14,11 @@ contract RevealPass {
     event Revealed(address indexed payer, uint256 amount, uint256 timestamp);
 
     error WrongTip(uint256 sent, uint256 required);
-    error TreasuryForwardFailed();
     error ZeroTreasury();
 
-    constructor(address treasury_, uint256 tipAmount_) {
-        if (treasury_ == address(0)) revert ZeroTreasury();
+    constructor(uint256 tipAmount_) {
         if (tipAmount_ == 0) revert WrongTip(0, 1);
-        treasury = treasury_;
+        treasury = address(this);
         tipAmount = tipAmount_;
     }
 
@@ -31,8 +29,6 @@ contract RevealPass {
             revealedAt[msg.sender] = block.timestamp;
         }
         emit Revealed(msg.sender, msg.value, block.timestamp);
-        (bool ok, ) = payable(treasury).call{value: msg.value}("");
-        if (!ok) revert TreasuryForwardFailed();
     }
 
     function isRevealed(address account) external view returns (bool) {

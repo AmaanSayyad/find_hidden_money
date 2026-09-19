@@ -7,14 +7,14 @@ Forgotten tokens. Every chain your wallet touches. Unlock the inventory with **1
 | Product | Find Hidden Money |
 | Live | [find-hidden-money.fun](https://www.find-hidden-money.fun/) |
 | Repo | [github.com/AmaanSayyad/find_hidden_money](https://github.com/AmaanSayyad/find_hidden_money) |
-| Contract | RevealPass [`0xb8171c4E2002Deea048477D8B337ff27F9a36687`](https://monadscan.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687) on Monad (`143`) |
+| Contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) on Monad (`143`) |
 | Tip | **1 MON** via `RevealPass.reveal()` from MetaMask |
 | Host | Vercel · custom domain `www.find-hidden-money.fun` |
 
 ### Pitch (say out loud)
 
 1. **Repo** — https://github.com/AmaanSayyad/find_hidden_money
-2. **Contract** — `0xb8171c4E2002Deea048477D8B337ff27F9a36687`
+2. **Contract** — `0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`
 3. **Live URL** — https://www.find-hidden-money.fun/
 4. **Deployment** — Vercel production on Monad Mainnet (chain ID `143`)
 
@@ -65,11 +65,11 @@ Connect → Scan → Value visible → Tip 1 MON → Tokens + chains unlock
 | --- | --- |
 | Amount | 1 MON (native) |
 | Chain | Monad (`143`) |
-| Contract | RevealPass [`0xb8171c4E2002Deea048477D8B337ff27F9a36687`](https://monadscan.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687) |
+| Contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) |
 | Call | `RevealPass.reveal()` with 1 MON from MetaMask |
 | Verify | Transaction receipt plus on-chain `isRevealed(address)` |
-| Deploy tx | [`0x709e315a…8acb`](https://monadscan.com/tx/0x709e315a051f8dee3fd6e4ef64bebd1942cdc5b15925c3bd5f5a6f3b862a8acb) |
-| Live `reveal()` | [`0xd4ed767a…8706`](https://monadscan.com/tx/0xd4ed767a1ea8fd3a1cce38ce2736998d2d8e43d4e13c31f892ba92b9db598706) |
+| Deploy tx | [`0x34a32cea…9703`](https://monadscan.com/tx/0x34a32cea2e0f23f3f0c7c1c803f3659374413792b5a46a688ad4c318a6e59703) |
+| Live `reveal()` | [`0xcb5ac2f9…2293`](https://monadscan.com/tx/0xcb5ac2f99e0ac0d33098406583ff9a3f0e9f2bf587c24b4c309d28cb7afc2293) |
 
 Phantom stays on Solana. The MON tip always uses the MetaMask EIP-6963 provider.
 
@@ -168,7 +168,7 @@ flowchart TB
   end
 
   subgraph monad ["Monad 143"]
-    RP["RevealPass\n0xb8171c4E…6687"]
+    RP["RevealPass\n0x19F82072…9957"]
     NODE["rpc.monad.xyz"]
   end
 
@@ -330,7 +330,7 @@ Wallet users already hold value they cannot see: dust on old L2s, leftover gas, 
 ### Revenue potential and strategy
 
 - **Primary:** 1 MON per reveal on Monad Mainnet. Paid in the open, no subscription, no custody.
-- **Unit:** one wallet session → one `RevealPass.reveal()` → one native MON burn-path to treasury. Cost to serve is indexer RPC + a receipt check.
+- **Unit:** one wallet session → one `RevealPass.reveal()` → 1 native MON stays on the contract. Cost to serve is indexer RPC + a receipt check.
 - **Expansion:** roster unlocks (pay once for many addresses), partner deep-scan, optional API for wallets that want a “forgotten funds” badge.
 - **Why MON:** the fee is not a stablecoin checkout. Every curious portfolio check creates Monad L1 demand.
 
@@ -339,7 +339,7 @@ Wallet users already hold value they cannot see: dust on old L2s, leftover gas, 
 - Totals are free; **token names and chains stay locked** until a mainnet MON tip. That is a product, not a faucet demo.
 - Tips always go through **MetaMask EIP-6963**, even when Phantom is connected for Solana — so the MON path cannot be hijacked.
 - Coverage is the product: Ankr / Moralis indexed tokens plus a Chainlist sweep of 2,000+ mainnets, with flash / impersonator stables forced to **$0**.
-- RevealPass is a verified mainnet contract: pay 1 MON, record `isRevealed`, forward to treasury. Source: `contracts/src/RevealPass.sol`.
+- RevealPass is a verified mainnet contract: pay 1 MON, record `isRevealed`, keep the tip on the contract. Source: `contracts/src/RevealPass.sol`.
 
 ---
 
@@ -365,7 +365,7 @@ npm run dev
 Tip defaults live in `src/lib/monad/config.ts`:
 
 - Amount: **1 MON**
-- Contract: [`0xb8171c4E2002Deea048477D8B337ff27F9a36687`](https://monadscan.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687)
+- Contract: [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957)
 - Source: `contracts/src/RevealPass.sol`
 
 ```bash

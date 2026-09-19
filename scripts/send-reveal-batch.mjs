@@ -19,7 +19,7 @@ const COUNT = Number(process.env.COUNT || 1);
 const MONAD_CHAIN_ID = 143;
 const MONAD_RPC_URL =
   process.env.MONAD_RPC_URL?.trim() || "https://rpc.monad.xyz";
-const MONAD_REVEAL_PASS = "0xb8171c4E2002Deea048477D8B337ff27F9a36687";
+const MONAD_REVEAL_PASS = "0x19F82072e6612156eC5F8b43fa404c3e3Eef9957";
 const MONAD_TIP_WEI = parseEther("1");
 const EXPLORER = "https://monadscan.com/tx";
 

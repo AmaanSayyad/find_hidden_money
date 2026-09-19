@@ -19,12 +19,12 @@ export const MONAD_NATIVE = {
 
 /** Where Find Hidden Money collects reveal tips (native MON). */
 export const MONAD_REVEAL_PASS =
-  "0xb8171c4E2002Deea048477D8B337ff27F9a36687" as const;
+  "0x19F82072e6612156eC5F8b43fa404c3e3Eef9957" as const;
 
 /**
- * RevealPass on Monad Mainnet — records unlocks. All tips go here.
- * https://monadscan.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687
- * https://monadvision.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687
+ * RevealPass on Monad Mainnet — records unlocks. 1 MON tips stay on this contract.
+ * https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957
+ * https://monadvision.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957
  */
 export const MONAD_TIP_RECIPIENT = MONAD_REVEAL_PASS;
 

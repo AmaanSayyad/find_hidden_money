@@ -2,10 +2,7 @@ export const revealPassAbi = [
   {
     type: "constructor",
     stateMutability: "nonpayable",
-    inputs: [
-      { name: "treasury_", type: "address" },
-      { name: "tipAmount_", type: "uint256" },
-    ],
+    inputs: [{ name: "tipAmount_", type: "uint256" }],
   },
   {
     type: "function",

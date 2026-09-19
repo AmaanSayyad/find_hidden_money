@@ -2,7 +2,7 @@
 
 import { MONAD_TIP_AMOUNT, MONAD_TIP_RECIPIENT } from "@/lib/monad/config";
 
-const UNLOCK_KEY = "fhm.monadTipUnlocks.v2.mainnet";
+const UNLOCK_KEY = "fhm.monadTipUnlocks.v3.mainnet";
 
 export type TipUnlockRecord = {
   address: string;
