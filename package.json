@@ -1,0 +1,47 @@
+{
+  "name": "find-hidden-money",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check-seed": "node scripts/check-seed-local.mjs",
+    "test-monad-tip": "npx tsx scripts/test-monad-tip.mjs"
+  },
+  "dependencies": {
+    "@metamask/connect-multichain": "^1.2.0",
+    "@metamask/connect-solana": "^2.1.1",
+    "@number-flow/react": "^0.6.2",
+    "@phantom/browser-sdk": "^2.0.2",
+    "@reown/appkit": "^1.8.24",
+    "@reown/appkit-adapter-bitcoin": "^1.8.24",
+    "@reown/appkit-adapter-solana": "^1.8.24",
+    "@reown/appkit-adapter-tron": "^1.8.24",
+    "@reown/appkit-adapter-wagmi": "^1.8.24",
+    "@tanstack/react-query": "^5.101.4",
+    "@wagmi/connectors": "^8.2.0",
+    "@wagmi/core": "^3.6.5",
+    "@wallet-standard/app": "^1.1.1",
+    "@x402/core": "^2.26.0",
+    "@x402/evm": "^2.26.0",
+    "@x402/svm": "^2.26.0",
+    "framer-motion": "^13.0.0",
+    "next": "16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "viem": "^2.55.11",
+    "wagmi": "^3.7.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
