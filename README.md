@@ -1,256 +1,127 @@
 # Find Hidden Money
 
-> Text pitch deck — scroll like slides.
-
 Forgotten tokens. Every chain your wallet touches. Unlock the inventory with **0.3 MON** on Monad Testnet.
 
-**Product** · Find Hidden Money  
-**Network** · Monad Testnet (`10143`) + multichain EVM / Solana / Bitcoin / Sui / Tron  
-**GitHub** · [AmaanSayyad/FindHiddenMoney](https://github.com/AmaanSayyad/FindHiddenMoney)
+| | |
+| --- | --- |
+| Product | Find Hidden Money |
+| Networks | Monad Testnet (`10143`) plus EVM, Solana, Bitcoin, Sui, and Tron |
+| Repo | [github.com/AmaanSayyad/find_hidden_money](https://github.com/AmaanSayyad/find_hidden_money) |
+
+Connect MetaMask or Phantom, see combined USD value immediately, then tip **0.3 MON** to RevealPass to unlock token names and chains.
 
 ---
 
-## Slide 01 · Title
+## The problem
 
-```
-FIND HIDDEN MONEY
-─────────────────
-Forgotten tokens. Every chain your wallet touches.
-Unlock the inventory with MON on Monad Testnet.
-
-Product    Find Hidden Money
-Network    Monad Testnet (chain ID 10143) + multichain EVM / Solana / BTC / more
-GitHub     https://github.com/AmaanSayyad/FindHiddenMoney
-```
-
----
-
-## Slide 02 · The problem
-
-```
-THE PROBLEM
-───────────
 People hold value they cannot see.
 
-• One MetaMask / Phantom account spans dozens of L2s and sidechains
-• Dust, airdrops, bridged stables, and “dead” L2 gas sit forgotten
-• Explorers are per-chain; wallets hide zero and dust by default
-• There is no clean “show me everything I own” moment — and no reason
-  to pay for that reveal in a native L1 token
+- One MetaMask or Phantom account spans dozens of L2s and sidechains
+- Dust, airdrops, bridged stables, and unused L2 gas sit forgotten
+- Explorers are per-chain; wallets hide zero and dust by default
+- There is no single “show me everything I own” moment, and no reason to pay for that reveal in a native L1 token
 
 Result: capital is stranded in plain sight.
-```
 
----
+## The insight
 
-## Slide 03 · The insight
+Portfolio total is curiosity. Token and chain inventory is the product.
 
-```
-THE INSIGHT
-───────────
-Portfolio total is curiosity.
-Token + chain inventory is the product.
+Users will pay a small native fee to learn **where** the money is — not just that it exists.
 
-Users will pay a small native fee to learn WHERE the money is —
-not just that it exists.
-```
+## How it works
 
----
-
-## Slide 04 · Solution
-
-```
-THE PRODUCT
-───────────
 1. Connect MetaMask or Phantom (multichain discovery, no paste required)
-2. Instantly see combined portfolio VALUE in USD
-3. Tip 0.3 MON on Monad Testnet to unlock:
-      • which tokens you hold
-      • which networks they live on
-4. Filter, search, deep-scan wallets — then act elsewhere
+2. Instantly see combined portfolio value in USD
+3. Tip **0.3 MON** on Monad Testnet to unlock which tokens you hold and which networks they live on
+4. Filter, search, and deep-scan wallets — then act elsewhere
 
-Find Hidden Money turns “I wonder…” into a paid reveal on Monad.
 ```
+Connect → Scan → Value visible → Tip 0.3 MON → Tokens + chains unlock
+```
+
+### Scan engines
+
+| Source | What it covers |
+| --- | --- |
+| Ankr / Moralis | Major EVM ERC-20s and prices |
+| Chainlist RPC sweep | Native balances on 2,000+ EVM nets |
+| Solana / Bitcoin / Sui / Tron / Robinhood / Fraxtal | Non-EVM and extra EVM holdings |
+| Monad Testnet RPC | Native MON (always scanned) |
+
+### Tip
+
+| Field | Value |
+| --- | --- |
+| Amount | 0.3 MON (native) |
+| Chain | Monad Testnet (`10143`) |
+| Contract | RevealPass [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadexplorer.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) |
+| Call | `RevealPass.reveal()` with 0.3 MON from MetaMask |
+| Verify | Transaction receipt plus on-chain `isRevealed(address)` |
+
+Phantom stays on Solana. The MON tip always uses the MetaMask EIP-6963 provider.
+
+## Why Monad Testnet
+
+- Real L1 utility: every reveal is a native MON transfer
+- Ethereum RPC compatible — same `0x` as MetaMask / Phantom EVM
+- ~400ms blocks, ~800ms finality — tip UX feels instant
+- Official testnet RPC, explorer, and faucet
+
+| Resource | URL |
+| --- | --- |
+| Docs | [docs.monad.xyz](https://docs.monad.xyz) |
+| RPC | [testnet-rpc.monad.xyz](https://testnet-rpc.monad.xyz) |
+| Explorer | [testnet.monadexplorer.com](https://testnet.monadexplorer.com) |
+| Faucet | [faucet.monad.xyz](https://faucet.monad.xyz) |
+
+## Product principles
+
+**Before tip**
+
+- Combined USD portfolio value
+- Per-wallet totals
+- Token symbols, contracts, and chain names stay locked
+
+**After tip**
+
+- Full inventory by chain
+- Search, dust filter, deep scan
+- Session unlock stored locally after a verified tip
+
+**Security**
+
+- Tip is an explicit user-signed spend in MetaMask (not a hidden approval)
+- Phantom is used for Solana discovery, never for the MON tip
+- Seed phrases and private keys never leave the user’s machine
+- The server only verifies tip transaction hashes on Monad Testnet RPC
+
+## Coverage
+
+| Ecosystem | Holdings |
+| --- | --- |
+| EVM | Ethereum, L2s, HyperEVM, Monad mainnet, Sei, Fraxtal, Robinhood, and 2,000+ Chainlist mainnets |
+| Monad Testnet | Native MON (tip chain) |
+| Solana | SOL + SPL / Token-2022 (up to 100 accounts, connect or paste) |
+| Bitcoin | Native BTC |
+| Sui | SUI + coins |
+| Tron | TRX + TRC assets when discovered |
+
+Fake / flash stables (for example PHDR “USDT”) are priced at **$0** after merge.
+
+## Stack
+
+| Layer | Choice |
+| --- | --- |
+| Frontend | Next.js 16 App Router, React 19, TypeScript, Tailwind v4, Framer Motion |
+| Wallets | MetaMask (EIP-6963), Phantom Solana, Reown AppKit (500+ wallets) |
+| Indexers | Ankr Advanced API, optional Moralis, public RPCs, Chainlist |
+| Monad Testnet | `testnet-rpc.monad.xyz` · RevealPass · chain `10143` |
+| Deploy | GitHub → Vercel (`ANKR_API_KEY` as server env) |
 
 ---
 
-## Slide 05 · How it works
-
-```
-FLOW
-────
-CONNECT  →  SCAN  →  VALUE VISIBLE  →  TIP 0.3 MON  →  TOKENS + CHAINS UNLOCK
-
-Scan engines
-  • Ankr / Moralis          — major EVM ERC-20s + prices
-  • Chainlist RPC sweep     — native balances on 2,000+ EVM nets
-  • Solana / Bitcoin / Sui / Tron / Robinhood / Fraxtal / …
-  • Monad Testnet RPC       — native MON (always scanned)
-
-Tip
-  • Amount     0.3 MON (native)
-  • Chain      Monad Testnet (10143)
-  • Contract   RevealPass 0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd
-  • Call       RevealPass.reveal() with 0.3 MON from MetaMask
-  • Verify     tx receipt + on-chain isRevealed(address)
-```
-
----
-
-## Slide 06 · Why Monad Testnet
-
-```
-WHY MONAD
-─────────
-• Real L1 utility: every reveal is a native MON transfer
-• Ethereum RPC compatible — same 0x as MetaMask / Phantom EVM
-• ~400ms blocks, ~800ms finality — tip UX feels instant
-• Metropolis-ready: official testnet RPC + explorer + faucet
-• Clear narrative: high-performance EVM gets consumer demand via tips
-
-Official links
-  Docs      https://docs.monad.xyz
-  RPC       https://testnet-rpc.monad.xyz
-  Explorer  https://testnet.monadexplorer.com
-  Faucet    https://faucet.monad.xyz
-  Resources https://hackathon.monad.xyz/resources
-```
-
----
-
-## Slide 07 · Product principles
-
-```
-DESIGN
-──────
-BEFORE TIP
-  ✓ Combined USD portfolio value
-  ✓ Per-wallet totals
-  ✗ Token symbols / contracts
-  ✗ Network names & chain tabs
-
-AFTER TIP
-  ✓ Full inventory by chain
-  ✓ Search, dust filter, deep scan
-  ✓ Session unlock stored locally after verified tip
-
-Security
-  • Tip is explicit user-signed spend in MetaMask (not a hidden approval)
-  • Phantom is used for Solana discovery, never for the MON tip
-  • Seed phrases / private keys never leave the user’s machine
-  • Server only verifies tip tx hashes on Monad Testnet RPC
-```
-
----
-
-## Slide 08 · Coverage map
-
-```
-ECOSYSTEMS SCANNED
-──────────────────
-EVM            Ethereum, L2s, HyperEVM, Monad mainnet, Sei, Fraxtal, Robinhood, …
-Monad Testnet  Native MON (tip chain)
-Solana         SOL + SPL / Token-2022 (up to 100 accounts, connect or paste)
-Bitcoin        Native BTC
-Sui            SUI + coins
-Tron           TRX + TRC assets (when discovered)
-```
-
----
-
-## Slide 09 · Business model
-
-```
-MONETIZATION
-────────────
-Primary     0.3 MON tip per unlock (on-chain, RevealPass)
-Secondary   Future: bulk unlocks, API, pro deep-scan, partner fees
-
-Unit economics (illustrative)
-  Tip           0.3 MON
-  Cost to serve indexer RPC + Monad verify   → low variable cost
-  Margin        driven by MON demand + tip volume
-
-Every paid reveal = measurable on-chain MON utility.
-```
-
----
-
-## Slide 10 · Go-to-market
-
-```
-GTM
-───
-1. Monad / Metropolis builders — “find dust, pay in MON”
-2. Wallet power users (MetaMask multi-account, Phantom multi-wallet)
-3. Content: “your portfolio is $X — tip to see the map”
-4. Ecosystem grant / hackathon support narratives on Monad
-5. Faucet + explorer deep-links so users can fund gas + tip
-```
-
----
-
-## Slide 11 · Tech stack
-
-```
-STACK
-─────
-Frontend        Next.js 16 App Router, React 19, TypeScript, Tailwind v4, Framer Motion
-Wallets         MetaMask (EIP-6963) + Phantom Solana + Reown AppKit (500+ wallets)
-Indexers        Ankr Advanced API, Moralis (optional), public RPCs, Chainlist
-Monad Testnet   testnet-rpc.monad.xyz · RevealPass 0x0FF147…D5Bd · chain 10143
-Deploy          GitHub → Vercel (ANKR_API_KEY as server env)
-```
-
----
-
-## Slide 12 · Traction checklist
-
-```
-SHIPPED
-───────
-[x] Multichain connect (MetaMask + Phantom + Reown)
-[x] Combined USD portfolio before tip
-[x] Token + chain inventory locked until 0.3 MON tip
-[x] Monad Testnet balance scan + tip verification
-[x] Multi-wallet Solana roster (up to 100, connect or paste)
-[x] Deep / batch scan for large EVM rosters
-
-NEXT
-────
-[ ] Production Vercel + env (when account quota allows)
-[ ] Tip analytics dashboard
-[ ] Optional tip tiers (single wallet vs full roster)
-```
-
----
-
-## Slide 13 · Ask
-
-```
-THE ASK
-───────
-Support Find Hidden Money as a Monad consumer app:
-
-• Amplify tip utility (docs, grants, ecosystem listing)
-• Preferential indexing / RPC guidance for Monad
-• Co-marketing with faucet / explorer for tip funding paths
-
-Outcome: every curious portfolio check burns a path for MON demand.
-```
-
----
-
-## Slide 14 · One-liner
-
-```
-Find Hidden Money shows what your wallet is worth for free —
-and sells the map of where it lives for 0.3 MON.
-```
-
----
-
-# Architecture
+## Architecture
 
 Next.js App Router UI on Vercel. The browser holds wallet sessions and the roster. Server routes only read public balances and verify Monad tips — they never see a seed or private key.
 
@@ -321,13 +192,11 @@ Scan modes (`src/lib/balances/index.ts`):
 - **indexed** — natives, known ERC-20s, extra mainnets, Ankr/Moralis tokens
 - **full** — indexed plus 2,000+ Chainlist mainnet natives (no testnets)
 
-Fake / flash stables (for example PHDR “USDT”) are priced at **$0** after merge.
-
 ---
 
-# Sequence diagrams
+## Sequence diagrams
 
-## Connect, roster, and scan
+### Connect, roster, and scan
 
 ```mermaid
 sequenceDiagram
@@ -351,7 +220,7 @@ sequenceDiagram
   UI-->>User: Combined USD (token names still locked)
 ```
 
-## Add wallets (one control)
+### Add wallets (one control)
 
 ```mermaid
 sequenceDiagram
@@ -377,7 +246,7 @@ sequenceDiagram
   Ctx-->>Menu: Updated roster
 ```
 
-## MON tip unlock (MetaMask only)
+### MON tip unlock (MetaMask only)
 
 Phantom can stay on Solana. The tip always uses the MetaMask EIP-6963 provider — never `window.phantom.ethereum`.
 
@@ -409,7 +278,7 @@ sequenceDiagram
   Gate-->>User: Token names and chains visible
 ```
 
-## Scan merge (server)
+### Scan merge (server)
 
 ```mermaid
 flowchart LR
@@ -438,7 +307,7 @@ flowchart LR
 
 ---
 
-# Developer setup
+## Developer setup
 
 ```bash
 npm install
@@ -469,12 +338,14 @@ npm run test-monad-tip   # optional: MONAD_TEST_PK=0x… (never commit keys)
 
 Add Monad Testnet in MetaMask:
 
-- Network name: Monad Testnet
-- RPC URL: `https://testnet-rpc.monad.xyz`
-- Chain ID: `10143`
-- Currency: `MON`
-- Explorer: `https://testnet.monadexplorer.com`
-- Faucet: `https://faucet.monad.xyz`
+| Setting | Value |
+| --- | --- |
+| Network name | Monad Testnet |
+| RPC URL | `https://testnet-rpc.monad.xyz` |
+| Chain ID | `10143` |
+| Currency | `MON` |
+| Explorer | [testnet.monadexplorer.com](https://testnet.monadexplorer.com) |
+| Faucet | [faucet.monad.xyz](https://faucet.monad.xyz) |
 
 ## License
 
