@@ -7,10 +7,11 @@ Forgotten tokens. Every chain your wallet touches. Unlock the inventory with **1
 | Product | Find Hidden Money |
 | Live | [find-hidden-money.fun](https://www.find-hidden-money.fun/) |
 | Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
+| Demo video | [x.com/amaanbiz/status/2101301008991441350](https://x.com/amaanbiz/status/2101301008991441350?s=20) |
 | Repo | [github.com/AmaanSayyad/find_hidden_money](https://github.com/AmaanSayyad/find_hidden_money) |
 | Mainnet contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) on Monad (`143`) |
 | Testnet contract | RevealPass [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) on Monad Testnet (`10143`) |
-| Tweet | [x.com/amaanbiz/status/2101283730832933220](https://x.com/amaanbiz/status/2101283730832933220?s=20) · tags [@monad](https://x.com/monad) [@monad_dev](https://x.com/monad_dev) [@geeky_kartikey](https://x.com/geeky_kartikey) · demo video attached |
+| Tweet | [x.com/amaanbiz/status/2101283730832933220](https://x.com/amaanbiz/status/2101283730832933220?s=20) · tags [@monad](https://x.com/monad) [@monad_dev](https://x.com/monad_dev) [@geeky_kartikey](https://x.com/geeky_kartikey) |
 | Tip | **1 MON** via `RevealPass.reveal()` from MetaMask (mainnet live) |
 | Host | Vercel · custom domain `www.find-hidden-money.fun` |
 
@@ -21,8 +22,9 @@ Forgotten tokens. Every chain your wallet touches. Unlock the inventory with **1
 3. **Testnet contract** — `0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`
 4. **Live URL** — https://www.find-hidden-money.fun/
 5. **Pitch deck** — https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing
-6. **Tweet + demo video** — https://x.com/amaanbiz/status/2101283730832933220?s=20
-7. **Deployment** — Vercel production on Monad Mainnet (chain ID `143`)
+6. **Demo video** — https://x.com/amaanbiz/status/2101301008991441350?s=20
+7. **Tweet** — https://x.com/amaanbiz/status/2101283730832933220?s=20
+8. **Deployment** — Vercel production on Monad Mainnet (chain ID `143`)
 
 Connect MetaMask or Phantom, see combined USD value immediately, then tip **1 MON** to RevealPass to unlock token names and chains.
 
@@ -138,6 +140,7 @@ Fake / flash stables (for example PHDR “USDT”) are priced at **$0** after me
 | Monad | `rpc.monad.xyz` · RevealPass · chain `143` |
 | Deploy | GitHub → Vercel · [find-hidden-money.fun](https://www.find-hidden-money.fun/) |
 | Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
+| Demo video | [X](https://x.com/amaanbiz/status/2101301008991441350?s=20) |
 
 ---
 
@@ -355,8 +358,8 @@ Wallet users already hold value they cannot see: dust on old L2s, leftover gas, 
 | --- | --- |
 | Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
 | Posted on X / LinkedIn tagging `@monad`, `@monad_dev`, `@geeky_kartikey` | [X post](https://x.com/amaanbiz/status/2101283730832933220?s=20) |
-| Demo video on socials (30s+, product running) | Same post — demo video attached |
-| Creative product ad on socials | Same post — live product walkthrough |
+| Demo video on socials (30s+, product running) | [Demo Video](https://x.com/amaanbiz/status/2101301008991441350?s=20) |
+| Creative product ad on socials | [Launch post](https://x.com/amaanbiz/status/2101283730832933220?s=20) + [demo video](https://x.com/amaanbiz/status/2101301008991441350?s=20) |
 | 5K+ collective views during Blitz | In progress — keep quoting, clipping, and sharing LinkedIn + X |
 
 ---
@@ -386,6 +389,7 @@ Tip defaults live in `src/lib/monad/config.ts` (production uses **mainnet**):
 - Mainnet RevealPass: [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) (`143`)
 - Testnet RevealPass: [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) (`10143`)
 - Pitch deck: [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing)
+- Demo video: [X](https://x.com/amaanbiz/status/2101301008991441350?s=20)
 - Source: `contracts/src/RevealPass.sol`
 
 ```bash

@@ -11,7 +11,7 @@ import { HeroCta } from "./HeroCta";
 import { LogoCloud } from "./LogoCloud";
 import { MonadMark } from "./MonadMark";
 import { PortfolioScanner } from "./PortfolioScanner";
-import { MONAD_PITCH_DECK_URL } from "@/lib/monad/config";
+import { MONAD_DEMO_VIDEO_URL, MONAD_PITCH_DECK_URL } from "@/lib/monad/config";
 import { COVERAGE_LOGOS, EVM_CLUSTER_LOGOS } from "@/lib/token-logo";
 
 const coverage = [
@@ -658,6 +658,13 @@ export function HomeView() {
                 rel="noreferrer"
               >
                 Pitch deck
+              </a>
+              <a
+                href={MONAD_DEMO_VIDEO_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Demo video
               </a>
             </div>
             <div>

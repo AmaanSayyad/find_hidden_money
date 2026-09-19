@@ -12,6 +12,8 @@ export const MONAD_DOCS_URL = "https://docs.monad.xyz";
 export const MONAD_LIVE_URL = "https://www.find-hidden-money.fun";
 export const MONAD_PITCH_DECK_URL =
   "https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing";
+export const MONAD_DEMO_VIDEO_URL =
+  "https://x.com/amaanbiz/status/2101301008991441350?s=20";
 
 export const MONAD_NATIVE = {
   symbol: "MON",
