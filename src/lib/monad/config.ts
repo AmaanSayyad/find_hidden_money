@@ -10,6 +10,8 @@ export const MONAD_FAUCET_URL = "https://monadscan.com";
 export const MONAD_WS_URL = "wss://rpc.monad.xyz";
 export const MONAD_DOCS_URL = "https://docs.monad.xyz";
 export const MONAD_LIVE_URL = "https://www.find-hidden-money.fun";
+export const MONAD_PITCH_DECK_URL =
+  "https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing";
 
 export const MONAD_NATIVE = {
   symbol: "MON",

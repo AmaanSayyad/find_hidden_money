@@ -6,17 +6,23 @@ Forgotten tokens. Every chain your wallet touches. Unlock the inventory with **1
 | --- | --- |
 | Product | Find Hidden Money |
 | Live | [find-hidden-money.fun](https://www.find-hidden-money.fun/) |
+| Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
 | Repo | [github.com/AmaanSayyad/find_hidden_money](https://github.com/AmaanSayyad/find_hidden_money) |
-| Contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) on Monad (`143`) |
-| Tip | **1 MON** via `RevealPass.reveal()` from MetaMask |
+| Mainnet contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) on Monad (`143`) |
+| Testnet contract | RevealPass [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) on Monad Testnet (`10143`) |
+| Tweet | [x.com/amaanbiz/status/2101283730832933220](https://x.com/amaanbiz/status/2101283730832933220?s=20) · tags [@monad](https://x.com/monad) [@monad_dev](https://x.com/monad_dev) [@geeky_kartikey](https://x.com/geeky_kartikey) · demo video attached |
+| Tip | **1 MON** via `RevealPass.reveal()` from MetaMask (mainnet live) |
 | Host | Vercel · custom domain `www.find-hidden-money.fun` |
 
 ### Pitch (say out loud)
 
 1. **Repo** — https://github.com/AmaanSayyad/find_hidden_money
-2. **Contract** — `0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`
-3. **Live URL** — https://www.find-hidden-money.fun/
-4. **Deployment** — Vercel production on Monad Mainnet (chain ID `143`)
+2. **Mainnet contract** — `0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`
+3. **Testnet contract** — `0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`
+4. **Live URL** — https://www.find-hidden-money.fun/
+5. **Pitch deck** — https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing
+6. **Tweet + demo video** — https://x.com/amaanbiz/status/2101283730832933220?s=20
+7. **Deployment** — Vercel production on Monad Mainnet (chain ID `143`)
 
 Connect MetaMask or Phantom, see combined USD value immediately, then tip **1 MON** to RevealPass to unlock token names and chains.
 
@@ -64,8 +70,9 @@ Connect → Scan → Value visible → Tip 1 MON → Tokens + chains unlock
 | Field | Value |
 | --- | --- |
 | Amount | 1 MON (native) |
-| Chain | Monad (`143`) |
-| Contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) |
+| Live chain | Monad Mainnet (`143`) |
+| Mainnet contract | RevealPass [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) |
+| Testnet contract | RevealPass [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) on Monad Testnet (`10143`) |
 | Call | `RevealPass.reveal()` with 1 MON from MetaMask |
 | Verify | Transaction receipt plus on-chain `isRevealed(address)` |
 | Deploy tx | [`0x34a32cea…9703`](https://monadscan.com/tx/0x34a32cea2e0f23f3f0c7c1c803f3659374413792b5a46a688ad4c318a6e59703) |
@@ -130,6 +137,7 @@ Fake / flash stables (for example PHDR “USDT”) are priced at **$0** after me
 | Indexers | Ankr Advanced API, optional Moralis, public RPCs, Chainlist |
 | Monad | `rpc.monad.xyz` · RevealPass · chain `143` |
 | Deploy | GitHub → Vercel · [find-hidden-money.fun](https://www.find-hidden-money.fun/) |
+| Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
 
 ---
 
@@ -284,7 +292,7 @@ sequenceDiagram
   MM-->>Gate: txHash
 
   Gate->>API: POST { txHash, from }
-  API->>Node: receipt + to==RevealPass + value>=0.3
+  API->>Node: receipt + to==RevealPass + value>=1 MON
   Node-->>API: success
   API-->>Gate: unlocked
   Gate-->>User: Token names and chains visible
@@ -341,6 +349,16 @@ Wallet users already hold value they cannot see: dust on old L2s, leftover gas, 
 - Coverage is the product: Ankr / Moralis indexed tokens plus a Chainlist sweep of 2,000+ mainnets, with flash / impersonator stables forced to **$0**.
 - RevealPass is a verified mainnet contract: pay 1 MON, record `isRevealed`, keep the tip on the contract. Source: `contracts/src/RevealPass.sol`.
 
+### Socials (Blitz)
+
+| Criteria | Proof |
+| --- | --- |
+| Pitch deck | [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing) |
+| Posted on X / LinkedIn tagging `@monad`, `@monad_dev`, `@geeky_kartikey` | [X post](https://x.com/amaanbiz/status/2101283730832933220?s=20) |
+| Demo video on socials (30s+, product running) | Same post — demo video attached |
+| Creative product ad on socials | Same post — live product walkthrough |
+| 5K+ collective views during Blitz | In progress — keep quoting, clipping, and sharing LinkedIn + X |
+
 ---
 
 # Developer setup
@@ -362,10 +380,12 @@ npm run dev
 | `NEXT_PUBLIC_REOWN_PROJECT_ID` | Reown AppKit (500+ wallets). Injected wallets work without it. |
 | `MONAD_TEST_PK` | Local RevealPass smoke tests only — **never commit** |
 
-Tip defaults live in `src/lib/monad/config.ts`:
+Tip defaults live in `src/lib/monad/config.ts` (production uses **mainnet**):
 
 - Amount: **1 MON**
-- Contract: [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957)
+- Mainnet RevealPass: [`0x19F82072e6612156eC5F8b43fa404c3e3Eef9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) (`143`)
+- Testnet RevealPass: [`0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) (`10143`)
+- Pitch deck: [Google Slides](https://docs.google.com/presentation/d/1WE8YuD3uMiGvezz_mtdHm6U-1meZ1P-hcsS65NjVbYY/edit?usp=sharing)
 - Source: `contracts/src/RevealPass.sol`
 
 ```bash
@@ -374,13 +394,14 @@ npm run test-monad-tip   # optional: MONAD_TEST_PK=0x… (never commit keys)
 
 Add Monad in MetaMask:
 
-| Setting | Value |
-| --- | --- |
-| Network name | Monad |
-| RPC URL | `https://rpc.monad.xyz` |
-| Chain ID | `143` |
-| Currency | `MON` |
-| Explorer | [monadscan.com](https://monadscan.com) |
+| Setting | Mainnet | Testnet |
+| --- | --- | --- |
+| Network name | Monad | Monad Testnet |
+| RPC URL | `https://rpc.monad.xyz` | `https://testnet-rpc.monad.xyz` |
+| Chain ID | `143` | `10143` |
+| Currency | `MON` | `MON` |
+| Explorer | [monadscan.com](https://monadscan.com) | [testnet.monadscan.com](https://testnet.monadscan.com) |
+| RevealPass | [`0x19F82072…9957`](https://monadscan.com/address/0x19F82072e6612156eC5F8b43fa404c3e3Eef9957) | [`0x0FF14768…D5Bd`](https://testnet.monadscan.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd) |
 
 ## License
 

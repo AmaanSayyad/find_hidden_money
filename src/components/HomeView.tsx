@@ -11,6 +11,7 @@ import { HeroCta } from "./HeroCta";
 import { LogoCloud } from "./LogoCloud";
 import { MonadMark } from "./MonadMark";
 import { PortfolioScanner } from "./PortfolioScanner";
+import { MONAD_PITCH_DECK_URL } from "@/lib/monad/config";
 import { COVERAGE_LOGOS, EVM_CLUSTER_LOGOS } from "@/lib/token-logo";
 
 const coverage = [
@@ -651,6 +652,13 @@ export function HomeView() {
                 Scan
               </a>
               <a href="#how">How it works</a>
+              <a
+                href={MONAD_PITCH_DECK_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pitch deck
+              </a>
             </div>
             <div>
               <h3>Coverage</h3>
