@@ -1,13 +1,15 @@
-/** Monad Testnet — product + tip constants (Metropolis) */
+/** Monad Mainnet — product + tip constants */
 
-export const MONAD_CHAIN_ID = 10143;
-export const MONAD_CHAIN_ID_HEX = "0x279f";
+export const MONAD_CHAIN_ID = 143;
+export const MONAD_CHAIN_ID_HEX = "0x8f";
+export const MONAD_NETWORK_NAME = "Monad";
 
-export const MONAD_RPC_URL = "https://testnet-rpc.monad.xyz";
-export const MONAD_EXPLORER_URL = "https://testnet.monadexplorer.com";
-export const MONAD_FAUCET_URL = "https://faucet.monad.xyz";
-export const MONAD_WS_URL = "wss://testnet-rpc.monad.xyz";
+export const MONAD_RPC_URL = "https://rpc.monad.xyz";
+export const MONAD_EXPLORER_URL = "https://monadscan.com";
+export const MONAD_FAUCET_URL = "https://monadscan.com";
+export const MONAD_WS_URL = "wss://rpc.monad.xyz";
 export const MONAD_DOCS_URL = "https://docs.monad.xyz";
+export const MONAD_LIVE_URL = "https://www.find-hidden-money.fun";
 
 export const MONAD_NATIVE = {
   symbol: "MON",
@@ -17,18 +19,18 @@ export const MONAD_NATIVE = {
 
 /** Where Find Hidden Money collects reveal tips (native MON). */
 export const MONAD_REVEAL_PASS =
-  "0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd" as const;
+  "0xb8171c4E2002Deea048477D8B337ff27F9a36687" as const;
 
 /**
- * RevealPass on Monad Testnet — records unlocks. All tips go here.
- * https://testnet.monadexplorer.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd
- * https://testnet.monadvision.com/address/0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd
+ * RevealPass on Monad Mainnet — records unlocks. All tips go here.
+ * https://monadscan.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687
+ * https://monadvision.com/address/0xb8171c4E2002Deea048477D8B337ff27F9a36687
  */
 export const MONAD_TIP_RECIPIENT = MONAD_REVEAL_PASS;
 
 /** Tip required to unlock token holdings. */
-export const MONAD_TIP_AMOUNT = "0.3";
-export const MONAD_TIP_AMOUNT_WEI = 300_000_000_000_000_000n; // 0.3 * 1e18
+export const MONAD_TIP_AMOUNT = "1";
+export const MONAD_TIP_AMOUNT_WEI = 1_000_000_000_000_000_000n; // 1 * 1e18
 
 export function monadRpcUrl(): string {
   return process.env.MONAD_RPC_URL?.trim() || MONAD_RPC_URL;

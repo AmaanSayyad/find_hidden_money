@@ -17,7 +17,6 @@ import {
   linea,
   mainnet,
   mantle,
-  monadTestnet,
   moonbeam,
   optimism,
   polygon,
@@ -30,6 +29,7 @@ import {
   type AppKitNetwork,
 } from "@reown/appkit/networks";
 import { MONAD_RPC_URL } from "@/lib/monad/config";
+import { monadMainnet } from "@/lib/monad/chain";
 
 /** Reown Cloud project ID — required for WalletConnect’s 500+ wallet catalog. */
 export const projectId =
@@ -39,7 +39,7 @@ export const projectId =
   "b56e18d47c72ab683b10814fe9495694";
 
 export const appKitNetworks = [
-  monadTestnet,
+  monadMainnet as AppKitNetwork,
   mainnet,
   polygon,
   arbitrum,
@@ -66,7 +66,7 @@ export const appKitNetworks = [
 ] as [AppKitNetwork, ...AppKitNetwork[]];
 
 export const customRpcUrls = {
-  "eip155:10143": [{ url: MONAD_RPC_URL }],
+  "eip155:143": [{ url: MONAD_RPC_URL }],
 };
 
 export const wagmiAdapter = new WagmiAdapter({
@@ -91,7 +91,7 @@ export const appKitMetadata = {
   name: "Find Hidden Money",
   description:
     "Read-only portfolio scan across EVM, Solana, Bitcoin, Tron, and Sui.",
-  url: "http://localhost:3000",
+  url: "https://www.find-hidden-money.fun",
   icons: ["/brand/apple-touch.png"],
 };
 

@@ -1042,7 +1042,7 @@ export function PortfolioScanner() {
           <p className="brand-hero">Your hidden money.</p>
           <p className="monad-chip">
             <MonadMark size={22} />
-            Built on Monad Testnet
+            Built on Monad
           </p>
           <h1 className="headline">{headline}</h1>
           <p className="lede">
@@ -1459,7 +1459,7 @@ export function PortfolioScanner() {
                   </p>
                   <p>
                     Your portfolio value is shown on the left. Tip{" "}
-                    {MONAD_TIP_AMOUNT} MON on Monad Testnet to reveal which
+                    {MONAD_TIP_AMOUNT} MON on Monad to reveal which
                     tokens you hold and on which networks.
                   </p>
                 </div>
@@ -1678,7 +1678,7 @@ export function PortfolioScanner() {
         <div className="storm-copy">
           <h2>Keep hunting forgotten balances.</h2>
           <p>
-            Totals stay free. Tip {MONAD_TIP_AMOUNT} MON on Monad Testnet to
+            Totals stay free. Tip {MONAD_TIP_AMOUNT} MON on Monad to
             unlock token names and networks.
           </p>
           <div className="hero-cta">

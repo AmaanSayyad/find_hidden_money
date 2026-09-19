@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Send N RevealPass.reveal() tips on Monad Testnet.
+ * Send N RevealPass.reveal() tips on Monad Mainnet.
  *   node --env-file=.env.local scripts/send-reveal-batch.mjs
  * Never commit private keys.
  */
@@ -15,13 +15,13 @@ import {
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
-const COUNT = Number(process.env.COUNT || 20);
-const MONAD_CHAIN_ID = 10143;
+const COUNT = Number(process.env.COUNT || 1);
+const MONAD_CHAIN_ID = 143;
 const MONAD_RPC_URL =
-  process.env.MONAD_RPC_URL?.trim() || "https://testnet-rpc.monad.xyz";
-const MONAD_REVEAL_PASS = "0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd";
-const MONAD_TIP_WEI = parseEther("0.3");
-const EXPLORER = "https://testnet.monadexplorer.com/tx";
+  process.env.MONAD_RPC_URL?.trim() || "https://rpc.monad.xyz";
+const MONAD_REVEAL_PASS = "0xb8171c4E2002Deea048477D8B337ff27F9a36687";
+const MONAD_TIP_WEI = parseEther("1");
+const EXPLORER = "https://monadscan.com/tx";
 
 const revealPassAbi = [
   {
@@ -33,12 +33,12 @@ const revealPassAbi = [
   },
 ];
 
-const monadTestnet = defineChain({
+const monadMainnet = defineChain({
   id: MONAD_CHAIN_ID,
-  name: "Monad Testnet",
+  name: "Monad",
   nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
   rpcUrls: { default: { http: [MONAD_RPC_URL] } },
-  testnet: true,
+  testnet: false,
 });
 
 const pk = process.env.MONAD_TEST_PK?.trim();
@@ -50,12 +50,12 @@ if (!pk) {
 const key = pk.startsWith("0x") ? pk : `0x${pk}`;
 const account = privateKeyToAccount(key);
 const publicClient = createPublicClient({
-  chain: monadTestnet,
+  chain: monadMainnet,
   transport: http(MONAD_RPC_URL),
 });
 const walletClient = createWalletClient({
   account,
-  chain: monadTestnet,
+  chain: monadMainnet,
   transport: http(MONAD_RPC_URL),
 });
 

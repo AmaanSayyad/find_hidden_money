@@ -13,7 +13,7 @@ async function rpc<T>(method: string, params: unknown[]): Promise<T> {
     timeoutMs: 12_000,
   });
   if (status < 200 || status >= 300) {
-    throw new Error(`Monad Testnet RPC HTTP ${status}`);
+    throw new Error(`Monad RPC HTTP ${status}`);
   }
   const data = JSON.parse(text) as { result?: T; error?: { message: string } };
   if (data.error) throw new Error(data.error.message);
@@ -38,7 +38,7 @@ async function fetchMonUsdPrice(): Promise<number | null> {
 }
 
 /**
- * Native MON on Monad Testnet (10143). Always scanned for the tip economy.
+ * Native MON on Monad Mainnet (143). Always scanned for the tip economy.
  */
 export async function fetchMonadTestnetPortfolio(
   address: string,
@@ -58,8 +58,8 @@ export async function fetchMonadTestnetPortfolio(
       const balance = Number(raw) / 10 ** MONAD_NATIVE.decimals;
       tokens.push({
         chainId: MONAD_CHAIN_ID,
-        chainName: "Monad Testnet",
-        chainSlug: "monad_testnet",
+        chainName: "Monad",
+        chainSlug: "monad",
         symbol: MONAD_NATIVE.symbol,
         name: "MON",
         balance,
@@ -73,7 +73,7 @@ export async function fetchMonadTestnetPortfolio(
       });
     }
   } else {
-    warnings.push("Monad Testnet: native balance RPC failed.");
+    warnings.push("Monad: native balance RPC failed.");
   }
 
   tokens.sort(
@@ -83,10 +83,10 @@ export async function fetchMonadTestnetPortfolio(
 
   if (tokens.length > 0) {
     warnings.push(
-      `Monad Testnet: ${tokens.length} native MON balance(s) via testnet-rpc.monad.xyz.`,
+      `Monad: ${tokens.length} native MON balance(s) via rpc.monad.xyz.`,
     );
   } else {
-    warnings.push("Monad Testnet: no native MON balance.");
+    warnings.push("Monad: no native MON balance.");
   }
 
   return {
@@ -95,7 +95,7 @@ export async function fetchMonadTestnetPortfolio(
     tokenCount: tokens.length,
     chainCount: tokens.length > 0 ? 1 : 0,
     tokens,
-    provider: "monad-testnet-rpc",
+    provider: "monad-rpc",
     scannedAt: new Date().toISOString(),
     warnings,
   };

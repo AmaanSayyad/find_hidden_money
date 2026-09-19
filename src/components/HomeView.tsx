@@ -22,7 +22,7 @@ const coverage = [
     icons: EVM_CLUSTER_LOGOS,
   },
   {
-    name: "Monad Testnet",
+    name: "Monad",
     detail: "Native MON tips",
     accent: "purple",
     icon: COVERAGE_LOGOS.monad,
@@ -56,14 +56,14 @@ const steps = [
   },
   {
     num: "02",
-    title: "Tip 0.3 MON",
-    body: "See your total value free — tip native MON on Monad Testnet to unlock tokens and chains.",
+    title: "Tip 1 MON",
+    body: "See your total value free — tip native MON on Monad to unlock tokens and chains.",
     icon: "/monad/mark.png",
   },
   {
     num: "03",
     title: "Review by network",
-    body: "See tokens across EVM, Solana, Bitcoin, Sui, and Monad Testnet with USD when priced.",
+    body: "See tokens across EVM, Solana, Bitcoin, Sui, and Monad with USD when priced.",
     icon: "/rain/threee.svg",
   },
   {
@@ -123,7 +123,7 @@ const skills = [
   {
     num: "03",
     title: "Reveal",
-    body: "Totals stay free. Tip 0.3 MON on Monad Testnet to unlock names and networks.",
+    body: "Totals stay free. Tip 1 MON on Monad to unlock names and networks.",
     icon: "/monad/mark.png",
   },
   {
@@ -317,7 +317,7 @@ export function HomeView() {
                     <p className="brand-hero">Forgotten money, found.</p>
                     <p className="monad-chip">
                       <MonadMark size={22} />
-                      Built on Monad Testnet
+                      Built on Monad
                     </p>
                     <h1 className="headline">
                       A portfolio radar for every chain your wallet still
@@ -658,7 +658,7 @@ export function HomeView() {
               <span>Solana · Bitcoin · Sui</span>
               <span className="footer-monad">
                 <MonadMark size={16} />
-                Monad Testnet tips
+                Monad tips
               </span>
             </div>
             <div>

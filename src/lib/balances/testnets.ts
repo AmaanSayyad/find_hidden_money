@@ -1,4 +1,4 @@
-/** Drop testnets from holdings. Monad Testnet is for tips only, not the portfolio. */
+/** Drop testnets from holdings. Monad Mainnet (143) stays in the portfolio. */
 
 const TESTNET_CHAIN_IDS = new Set([
   5, // Goerli

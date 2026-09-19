@@ -4,12 +4,11 @@ import { useState } from "react";
 import {
   MONAD_CHAIN_ID,
   MONAD_EXPLORER_URL,
-  MONAD_FAUCET_URL,
   MONAD_REVEAL_PASS,
   MONAD_TIP_AMOUNT,
   monadExplorerTx,
 } from "@/lib/monad/config";
-import { monadTestnetAddEthereumParams } from "@/lib/monad/chain";
+import { monadAddEthereumParams } from "@/lib/monad/chain";
 import { encodeRevealCalldata, tipValueWei } from "@/lib/monad/tip";
 import {
   isWalletTipUnlocked,
@@ -22,7 +21,7 @@ import {
 import { MonadMark } from "./MonadMark";
 import { shortenAddress } from "@/lib/format";
 
-async function ensureMonadTestnet(provider: EthereumProvider) {
+async function ensureMonad(provider: EthereumProvider) {
   const chainId = (await provider.request({ method: "eth_chainId" })) as string;
   const want = `0x${MONAD_CHAIN_ID.toString(16)}`;
   if (chainId?.toLowerCase() === want) return;
@@ -36,7 +35,7 @@ async function ensureMonadTestnet(provider: EthereumProvider) {
     if (code === 4902 || code === -32603) {
       await provider.request({
         method: "wallet_addEthereumChain",
-        params: [monadTestnetAddEthereumParams()],
+        params: [monadAddEthereumParams()],
       });
       return;
     }
@@ -113,7 +112,7 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
           "Unlock MetaMask to send the MON tip. Phantom is only used for Solana and will not be asked to sign.",
         );
       }
-      await ensureMonadTestnet(provider);
+      await ensureMonad(provider);
       const mmAccounts = (await provider.request({
         method: "eth_requestAccounts",
       })) as string[];
@@ -146,7 +145,7 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
       const msg = err instanceof Error ? err.message : String(err);
       if (/insufficient|funds|balance/i.test(msg)) {
         setError(
-          `Need at least ${MONAD_TIP_AMOUNT} MON on Monad Testnet (${MONAD_CHAIN_ID}) plus gas. Claim testnet MON from the faucet.`,
+          `Need at least ${MONAD_TIP_AMOUNT} MON on Monad (${MONAD_CHAIN_ID}) plus gas.`,
         );
       } else if (/reject|denied|4001/i.test(msg)) {
         setError("Tip cancelled in wallet.");
@@ -161,7 +160,7 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
   const onManualVerify = async () => {
     setError(null);
     if (!manualHash.trim()) {
-      setError("Paste a Monad Testnet tip transaction hash.");
+      setError("Paste a Monad tip transaction hash.");
       return;
     }
     setPending(true);
@@ -184,7 +183,7 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
         <MonadMark size={28} />
         <p>
           <strong>Tokens unlocked</strong> with a {MONAD_TIP_AMOUNT} MON tip on
-          Monad Testnet.
+          Monad.
           {lastTx && lastTx.startsWith("0x") ? (
             <>
               {" "}
@@ -207,12 +206,12 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
       className="tip-gate"
       id="tip-gate"
       role="region"
-      aria-label="Monad Testnet tip unlock"
+      aria-label="Monad tip unlock"
     >
       <div className="tip-copy">
         <p className="tip-eyebrow">
           <MonadMark size={20} />
-          Monad Testnet · reveal fee
+          Monad · reveal fee
         </p>
         <h2 className="tip-title">
           Tip {MONAD_TIP_AMOUNT} MON to unlock tokens &amp; chains
@@ -221,7 +220,7 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
           Your total portfolio value stays visible. Token names and which
           networks they sit on unlock after you call{" "}
           <code>RevealPass.reveal()</code> with {MONAD_TIP_AMOUNT} MON in{" "}
-          <strong>MetaMask</strong> on Monad Testnet (chain ID {MONAD_CHAIN_ID}
+          <strong>MetaMask</strong> on Monad (chain ID {MONAD_CHAIN_ID}
           ). Phantom stays on Solana and is never used for this tip. Tips go to{" "}
           <code title={MONAD_REVEAL_PASS}>
             {shortenAddress(MONAD_REVEAL_PASS)}
@@ -239,14 +238,6 @@ export function MonadTipGate({ payerAddress, unlocked, onUnlocked }: Props) {
         >
           {pending ? "Confirming tip…" : `Tip ${MONAD_TIP_AMOUNT} MON & unlock`}
         </button>
-        <a
-          className="btn-ghost"
-          href={MONAD_FAUCET_URL}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Get testnet MON
-        </a>
         <a
           className="linkish"
           href={`${MONAD_EXPLORER_URL}/address/${MONAD_REVEAL_PASS}`}

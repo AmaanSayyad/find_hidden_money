@@ -16,7 +16,7 @@ type Body = {
 };
 
 /**
- * Verify a RevealPass tip on Monad Testnet (10143).
+ * Verify a RevealPass tip on Monad Mainnet (143).
  * POST { txHash, from? } — check a transaction.
  * GET ?address=0x… — read on-chain unlock state.
  */
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
       contract: MONAD_REVEAL_PASS,
       chainId: MONAD_CHAIN_ID,
       symbol: "MON",
-      network: "Monad Testnet",
+      network: "Monad",
     });
   }
 
@@ -81,6 +81,6 @@ export async function GET(request: Request) {
     contract: MONAD_REVEAL_PASS,
     chainId: MONAD_CHAIN_ID,
     symbol: "MON",
-    network: "Monad Testnet",
+    network: "Monad",
   });
 }

@@ -3,12 +3,13 @@ import {
   MONAD_CHAIN_ID,
   MONAD_EXPLORER_URL,
   MONAD_NATIVE,
+  MONAD_NETWORK_NAME,
   MONAD_RPC_URL,
 } from "./config";
 
-export const monadTestnet = defineChain({
+export const monadMainnet = defineChain({
   id: MONAD_CHAIN_ID,
-  name: "Monad Testnet",
+  name: MONAD_NETWORK_NAME,
   nativeCurrency: {
     name: MONAD_NATIVE.name,
     symbol: MONAD_NATIVE.symbol,
@@ -18,16 +19,19 @@ export const monadTestnet = defineChain({
     default: { http: [MONAD_RPC_URL] },
   },
   blockExplorers: {
-    default: { name: "Monad Explorer", url: MONAD_EXPLORER_URL },
+    default: { name: "Monadscan", url: MONAD_EXPLORER_URL },
   },
-  testnet: true,
+  testnet: false,
 });
 
+/** @deprecated Use monadMainnet — kept so existing imports keep compiling. */
+export const monadTestnet = monadMainnet;
+
 /** EIP-3085 payload for wallet_addEthereumChain */
-export function monadTestnetAddEthereumParams() {
+export function monadAddEthereumParams() {
   return {
     chainId: `0x${MONAD_CHAIN_ID.toString(16)}`,
-    chainName: "Monad Testnet",
+    chainName: MONAD_NETWORK_NAME,
     nativeCurrency: {
       name: MONAD_NATIVE.name,
       symbol: MONAD_NATIVE.symbol,
@@ -37,3 +41,6 @@ export function monadTestnetAddEthereumParams() {
     blockExplorerUrls: [MONAD_EXPLORER_URL],
   };
 }
+
+/** @deprecated Use monadAddEthereumParams */
+export const monadTestnetAddEthereumParams = monadAddEthereumParams;

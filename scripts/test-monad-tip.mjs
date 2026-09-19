@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Local Monad Testnet RevealPass smoke test. Never commit private keys.
+ * Local Monad RevealPass smoke test. Never commit private keys.
  *
  *   MONAD_TEST_PK=0x... npx tsx scripts/test-monad-tip.mjs
  */
@@ -15,12 +15,12 @@ import {
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
-const MONAD_CHAIN_ID = 10143;
+const MONAD_CHAIN_ID = 143;
 const MONAD_RPC_URL =
-  process.env.MONAD_RPC_URL?.trim() || "https://testnet-rpc.monad.xyz";
-const MONAD_TIP_AMOUNT = "0.3";
+  process.env.MONAD_RPC_URL?.trim() || "https://rpc.monad.xyz";
+const MONAD_TIP_AMOUNT = "1";
 const MONAD_TIP_RECIPIENT = "0xA703E1EdAF03295A4f53C1170ea39b8fFFb161f9";
-const MONAD_REVEAL_PASS = "0x0FF14768c7598e6F287bfC6451B888c406dfD5Bd";
+const MONAD_REVEAL_PASS = "0xb8171c4E2002Deea048477D8B337ff27F9a36687";
 const MONAD_TIP_WEI = parseEther(MONAD_TIP_AMOUNT);
 
 const revealPassAbi = [
@@ -42,10 +42,10 @@ const revealPassAbi = [
 
 const monadTestnet = defineChain({
   id: MONAD_CHAIN_ID,
-  name: "Monad Testnet",
+  name: "Monad",
   nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
   rpcUrls: { default: { http: [MONAD_RPC_URL] } },
-  testnet: true,
+  testnet: false,
 });
 
 const pk = process.env.MONAD_TEST_PK?.trim();
@@ -132,7 +132,7 @@ if (already) {
 
 if (bal < MONAD_TIP_WEI) {
   console.error(
-    `\nINSUFFICIENT MON — need ${MONAD_TIP_AMOUNT} + gas, have ${formatEther(bal)}.\nFund ${account.address} on Monad Testnet (10143) via https://faucet.monad.xyz then re-run to send the tip.`,
+    `\nINSUFFICIENT MON — need ${MONAD_TIP_AMOUNT} + gas, have ${formatEther(bal)}.\nFund ${account.address} on Monad (143) then re-run to send the tip.`,
   );
   process.exit(2);
 }

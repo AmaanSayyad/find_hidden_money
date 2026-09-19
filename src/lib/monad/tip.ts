@@ -14,7 +14,7 @@ import {
   MONAD_TIP_RECIPIENT,
   monadRpcUrl,
 } from "./config";
-import { monadTestnet } from "./chain";
+import { monadMainnet } from "./chain";
 import { revealPassAbi } from "./reveal-pass";
 
 const REVEAL_SELECTOR = toFunctionSelector("reveal()");
@@ -35,7 +35,7 @@ export type TipVerifyResult =
 
 export function getMonadPublicClient() {
   return createPublicClient({
-    chain: monadTestnet,
+    chain: monadMainnet,
     transport: http(monadRpcUrl()),
   });
 }
@@ -82,14 +82,14 @@ export async function verifyMonadTipTx(
     return {
       ok: false,
       error:
-        "Transaction not found on Monad Testnet yet — wait a few seconds and retry.",
+        "Transaction not found on Monad yet — wait a few seconds and retry.",
     };
   }
 
   if (!receipt || receipt.status !== "success") {
     return {
       ok: false,
-      error: "Transaction failed or still pending on Monad Testnet",
+      error: "Transaction failed or still pending on Monad",
     };
   }
 
