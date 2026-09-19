@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { useMultichainWallet } from "@/context/MultichainWallet";
 import { easeOut, fadeUp, floatSlow, floatY, staggerContainer } from "@/lib/motion";
 import { BrandMark } from "./BrandMark";
@@ -164,6 +164,7 @@ const navLinks = [
 ] as const;
 
 const connectedNav = [
+  { href: "#home", label: "Home" },
   { href: "#portfolio", label: "Scan" },
   { href: "#wallets", label: "Wallets" },
 ] as const;
@@ -172,10 +173,47 @@ export function HomeView() {
   const { isConnected, isPending, connect } = useMultichainWallet();
   const reduceMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = isConnected ? connectedNav : navLinks;
+  const [view, setView] = useState<"home" | "scan">("home");
+  const showScan = isConnected && view === "scan";
+  const links = showScan ? connectedNav : navLinks;
+
+  useEffect(() => {
+    setView(isConnected ? "scan" : "home");
+  }, [isConnected]);
+
+  const openHome = () => {
+    setView("home");
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const openScan = (hash = "#portfolio") => {
+    setView("scan");
+    setMenuOpen(false);
+    window.setTimeout(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+    }, 40);
+  };
+
+  const onNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (href === "#home") {
+      event.preventDefault();
+      openHome();
+      return;
+    }
+    if (href === "#portfolio" || href === "#wallets") {
+      event.preventDefault();
+      openScan(href);
+      return;
+    }
+    setMenuOpen(false);
+  };
 
   return (
-    <div className={`page ${isConnected ? "page-connected" : ""}`}>
+    <div className={`page ${showScan ? "page-connected" : ""}`}>
       <div className="atmosphere" aria-hidden />
 
       <div className="shell">
@@ -186,12 +224,23 @@ export function HomeView() {
           animate={{ opacity: 1, y: 0 }}
           transition={easeOut}
         >
-          <a className="brand-mark" href="/">
+          <a
+            className="brand-mark"
+            href="/"
+            onClick={(event) => {
+              event.preventDefault();
+              openHome();
+            }}
+          >
             <BrandMark />
           </a>
           <nav className="top-nav" aria-label="Primary">
             {links.map((link) => (
-              <a key={link.href} href={link.href}>
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(event) => onNavClick(event, link.href)}
+              >
                 {link.label}
               </a>
             ))}
@@ -212,7 +261,7 @@ export function HomeView() {
           </div>
         </motion.header>
         {isConnected ? (
-          <div id="scan-tape-slot" className="scan-tape-slot" />
+          <div id="scan-tape-slot" className="scan-tape-slot" hidden={!showScan} />
         ) : null}
         </div>
 
@@ -230,7 +279,7 @@ export function HomeView() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(event) => onNavClick(event, link.href)}
                 >
                   {link.label}
                 </a>
@@ -254,7 +303,7 @@ export function HomeView() {
 
         <main>
           <AnimatePresence mode="wait">
-            {!isConnected ? (
+            {!showScan ? (
               <motion.div
                 key="landing"
                 initial={false}
@@ -279,7 +328,7 @@ export function HomeView() {
                       addresses, then list every balance that still shows up.
                     </p>
                     <div id="connect">
-                      <HeroCta />
+                      <HeroCta onViewScan={() => openScan("#portfolio")} />
                     </div>
                   </div>
                   <div className="hero-mascot-wrap">
@@ -531,9 +580,22 @@ export function HomeView() {
                       are free. Token names unlock with a MON tip.
                     </p>
                     <div className="hero-cta">
-                      <a className="btn-on-lime" href="#connect">
-                        Connect wallet
-                      </a>
+                      {isConnected ? (
+                        <a
+                          className="btn-on-lime"
+                          href="#portfolio"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            openScan("#portfolio");
+                          }}
+                        >
+                          View scan
+                        </a>
+                      ) : (
+                        <a className="btn-on-lime" href="#connect">
+                          Connect wallet
+                        </a>
+                      )}
                       <a className="btn-on-lime-ghost" href="#how">
                         How it works
                       </a>
@@ -556,19 +618,38 @@ export function HomeView() {
             ) : null}
           </AnimatePresence>
 
-          <PortfolioScanner />
+          <div hidden={!showScan}>
+            <PortfolioScanner />
+          </div>
         </main>
 
         <footer className="site-footer">
           <div className="footer-brand">
-            <BrandMark />
+            <a
+              className="brand-mark"
+              href="/"
+              onClick={(event) => {
+                event.preventDefault();
+                openHome();
+              }}
+            >
+              <BrandMark />
+            </a>
             <p>Read-only portfolio scan. Never asks to sign or spend.</p>
           </div>
           <div className="footer-cols">
             <div>
               <h3>Product</h3>
               <a href="#connect">Connect</a>
-              <a href="#portfolio">Scan</a>
+              <a
+                href="#portfolio"
+                onClick={(event) => {
+                  event.preventDefault();
+                  openScan("#portfolio");
+                }}
+              >
+                Scan
+              </a>
               <a href="#how">How it works</a>
             </div>
             <div>

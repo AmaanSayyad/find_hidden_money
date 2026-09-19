@@ -42,3 +42,4 @@ coverage
 contracts/out
 contracts/cache
 contracts/broadcast
+.env*.local
